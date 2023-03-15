@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/basic_cmake.elf",
+            "name": "Debug (J-Link)",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32F103CB",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "jlink",
+            "interface": "swd",
+            "svdFile" : "${workspaceFolder}/system/STM32F103xx.svd"
+        }
+    ]
+}
