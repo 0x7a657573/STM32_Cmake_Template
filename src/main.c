@@ -15,11 +15,22 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-
+#include <stm32f1xx.h>
+#include <stm32f1xx_hal.h>
+#include <stm32f1xx_hal_gpio.h>
+#include "main.h"
 
 int main(void)
 {
+    HAL_Init();
+    LED_GPIO_CLK_ENABLE();
 
+
+    while (1)
+    {
+        LL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+        HAL_Delay(100);
+    }
+    
    return 0; 
 }
