@@ -56,24 +56,24 @@ set(SRC_FILES
     stm32f1xx_hal_driver/Src/stm32f1xx_hal_tim.c
     stm32f1xx_hal_driver/Src/stm32f1xx_hal_sram.c
     stm32f1xx_hal_driver/Src/stm32f1xx_hal_spi.c
-
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_rcc.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_pwr.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_i2c.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_gpio.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_fsmc.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_exti.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_dma.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_dac.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_crc.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_adc.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_utils.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_usb.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_usart.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_tim.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_spi.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_sdmmc.c
-    # stm32f1xx_hal_driver/Src/stm32f1xx_ll_rtc.c
+    # LL Library Source
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_rcc.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_pwr.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_i2c.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_gpio.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_fsmc.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_exti.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_dma.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_dac.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_crc.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_adc.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_utils.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_usb.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_usart.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_tim.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_spi.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_sdmmc.c
+    stm32f1xx_hal_driver/Src/stm32f1xx_ll_rtc.c
 )
 
 set(INC_FILES

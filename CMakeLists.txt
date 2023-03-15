@@ -14,7 +14,7 @@ set(MAIN_SRC_FILES
 
 # List of include files
 set(MAIN_INC_FILES
-    
+    Inc/
 )
 
 # List of libraries
