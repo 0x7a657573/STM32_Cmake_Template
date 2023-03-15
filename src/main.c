@@ -22,9 +22,8 @@
 
 int main(void)
 {
-    HAL_Init();
     LED_GPIO_CLK_ENABLE();
-
+    LL_GPIO_SetPinMode(LED_GPIO_PORT, LED_PIN, LL_GPIO_MODE_OUTPUT);
 
     while (1)
     {

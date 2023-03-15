@@ -10,6 +10,7 @@ project (basic_cmake)
 # List of source files
 set(MAIN_SRC_FILES
     src/main.c
+    src/initialize-hardware.c
 )
 
 # List of include files
