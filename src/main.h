@@ -28,7 +28,7 @@
 #include <stm32f1xx_ll_utils.h>
 #include <stm32f1xx_ll_gpio.h>
 #if defined(USE_FULL_ASSERT)
-#include <stm32_assert.h>
+//#include <stm32_assert.h>
 #endif /* USE_FULL_ASSERT */
 
 /* Exported types ------------------------------------------------------------*/
