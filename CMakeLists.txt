@@ -50,17 +50,6 @@ set(CMAKE_C_EXTENSIONS OFF)
 # Optional: issue a message to be sure it uses the correct toolchain file.
 message(STATUS "CMAKE_TOOLCHAIN_FILE is: ${CMAKE_TOOLCHAIN_FILE}")
 
-# Find all subdirectories that have CMakeLists.txt files
-file(GLOB SUBDIRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} */CMakeLists.txt)
-
-# Remove the CMakeLists.txt part from each subdirectory name
-string(REGEX REPLACE "/CMakeLists.txt" "" SUBDIRS "${SUBDIRS}")
-
-#Add each subdirectory to the build
-foreach(SUBDIR ${SUBDIRS})
-    add_subdirectory(${SUBDIR})
-endforeach()
-
 # Finding All SourceList.cmake in all sub directory
 # Find all subdirectories that have SourceLists.cmake files
 file(GLOB SUBDIRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} */SourceLists.cmake)
