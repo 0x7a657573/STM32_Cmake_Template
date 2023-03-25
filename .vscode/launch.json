@@ -12,7 +12,7 @@
             "type": "cortex-debug",
             "device": "STM32F103CB",
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "vscode",
+            "showDevDebugOutput": "none",
             "servertype": "jlink",
             "interface": "swd",
             "rtos": "FreeRTOS",
