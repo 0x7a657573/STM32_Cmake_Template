@@ -3,6 +3,9 @@ cmake_minimum_required (VERSION 3.15.3)
 # Path to toolchain file. This one has to be before 'project()' below
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake)
 
+# Switch for FreeRTOS support, enable it for some Applications who needs it.
+set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
+
 # Set Project Name
 project (basic_cmake)
 
@@ -18,9 +21,18 @@ set(MAIN_INC_FILES
     Inc/
 )
 
+# List of defines
+set (TARGET_DEF_LISTS
+    -DDEBUG        
+    -DUSE_FULL_ASSERT
+    -DSTM32F103xB
+    -DUSE_HAL_DRIVER
+    -DHSE_VALUE=8000000
+)
+
 # List of libraries
 set(LIB_LIST
-    
+
 )
 
 # Linker Selection 
@@ -69,6 +81,46 @@ foreach(SUBDIR ${SUBDIRS})
     unset(SRC_FILES)
 endforeach()
 
+# Add FreeRTOS
+if(ENABLE_FREERTOS)
+    message(STATUS "ٍEnable FreeRTOS")
+
+    add_library(freertos_config INTERFACE)
+    target_include_directories(freertos_config SYSTEM
+    INTERFACE
+    system
+    )
+
+    target_compile_definitions(freertos_config
+    INTERFACE
+    projCOVERAGE_TEST=0
+    )
+    
+    target_compile_options(freertos_config INTERFACE
+    -mcpu=cortex-m3 
+    -mthumb 
+    -std=gnu99
+    -Os
+    -g3
+    -fmessage-length=0 
+    -fsigned-char 
+    -ffunction-sections 
+    -fdata-sections 
+    -ffreestanding 
+    -fno-move-loop-invariants 
+    -Wall 
+    -Wextra 
+    )
+
+    # Select the native compile PORT
+    set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
+    set(FREERTOS_HEAP "4" CACHE STRING "")
+
+    add_subdirectory(system/FreeRTOS)
+    list(APPEND LIB_LIST "freertos_kernel")
+    list(APPEND TARGET_DEF_LISTS USE_FREERTOS)
+endif(ENABLE_FREERTOS)
+
 # Build the executable based on the source files
 set(EXECUTABLE ${PROJECT_NAME}.elf)
 add_executable(${EXECUTABLE} ${MAIN_SRC_FILES})
@@ -81,13 +133,7 @@ target_include_directories(${EXECUTABLE} PUBLIC ${MAIN_INC_FILES})
 target_link_libraries(${EXECUTABLE} ${LIB_LIST})
 
 # List of compiler defines, prefix with -D compiler option
-target_compile_definitions(${EXECUTABLE} PUBLIC
-    -DDEBUG        
-    -DUSE_FULL_ASSERT
-    -DSTM32F103xB
-    -DUSE_HAL_DRIVER
-    -DHSE_VALUE=8000000
-)
+target_compile_definitions(${EXECUTABLE} PUBLIC ${TARGET_DEF_LISTS})
 
 # Compiler options
 target_compile_options(${EXECUTABLE} PUBLIC
