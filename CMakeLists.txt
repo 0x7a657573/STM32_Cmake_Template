@@ -6,6 +6,7 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake)
 # Switch for FreeRTOS support, enable it for some Applications who needs it.
 set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 
+
 # Set Project Name
 project (basic_cmake)
 
@@ -115,10 +116,12 @@ if(ENABLE_FREERTOS)
     # Select the native compile PORT
     set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
     set(FREERTOS_HEAP "4" CACHE STRING "")
+    set(FREERTOS_MAINSTACK "512" CACHE STRING "FreeRTOS main task stack in Byte")
 
     add_subdirectory(system/FreeRTOS)
     list(APPEND LIB_LIST "freertos_kernel")
     list(APPEND TARGET_DEF_LISTS USE_FREERTOS)
+    list(APPEND TARGET_DEF_LISTS FREERTOS_MAINSTACK=${FREERTOS_MAINSTACK})
 endif(ENABLE_FREERTOS)
 
 # Build the executable based on the source files

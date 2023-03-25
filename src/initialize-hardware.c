@@ -99,7 +99,7 @@ __initialize_hardware(void)
 #ifdef USE_FREERTOS
     extern void main( void * pvParameters );
     /* Create main tasks defined within main.c itself */
-    xTaskCreate( main, "main", 1024, NULL, tskIDLE_PRIORITY, NULL );
+    xTaskCreate( main, "main", FREERTOS_MAINSTACK/sizeof(int), NULL, tskIDLE_PRIORITY, NULL );
     /* Start the tasks and timer running. */
     vTaskStartScheduler();
 #endif
