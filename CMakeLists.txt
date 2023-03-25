@@ -42,6 +42,19 @@ set(LINKER_SECTIONS
    -Tsections.ld
 )
 
+# Microcontroller memory config
+set(FLASH_SIZE "64K" CACHE STRING "microcontroller FLASH size") 
+set(RAM_SIZE  "20K" CACHE STRING "microcontroller RAM size")
+
+configure_file (
+    "${PROJECT_SOURCE_DIR}/system/ldscripts/mem.ld.in"
+    "${PROJECT_BINARY_DIR}/system/ldscripts/mem.ld"
+)
+configure_file (
+    "${PROJECT_SOURCE_DIR}/system/ldscripts/sections.ld.in"
+    "${PROJECT_BINARY_DIR}/system/ldscripts/sections.ld"
+)
+
 find_package(Git QUIET)
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 # Update submodules as needed
@@ -158,7 +171,7 @@ target_compile_options(${EXECUTABLE} PUBLIC
 # Linker options
 target_link_options(${EXECUTABLE} PRIVATE
     ${LINKER_SECTIONS}
-    -L${CMAKE_SOURCE_DIR}/system/ldscripts
+    -L${CMAKE_CURRENT_BINARY_DIR}/system/ldscripts
 
     -mcpu=cortex-m3
     -fmessage-length=0 
