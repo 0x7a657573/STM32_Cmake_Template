@@ -10,6 +10,10 @@ set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 # Set Project Name
 project (basic_cmake)
 
+# Allow switching of target mcu
+set(MCU_LIST STM32F1xx STM32F4xx)
+set(MCU STM32F1xx CACHE STRING "Default target is STM32F1xx")
+set_property(CACHE MCU PROPERTY STRINGS ${MCU_LIST})
 
 # List of source files
 set(MAIN_SRC_FILES
@@ -34,6 +38,23 @@ set (TARGET_DEF_LISTS
 # List of libraries
 set(LIB_LIST
 
+)
+
+# compiler option
+set(COMPILER_OPTION 
+    -mcpu=cortex-m3 
+    -mthumb 
+    -std=gnu99
+    -Os
+    -g3
+    -fmessage-length=0 
+    -fsigned-char 
+    -ffunction-sections 
+    -fdata-sections 
+    -ffreestanding 
+    -fno-move-loop-invariants 
+    -Wall 
+    -Wextra 
 )
 
 # Linker Selection 
@@ -110,21 +131,7 @@ if(ENABLE_FREERTOS)
     projCOVERAGE_TEST=0
     )
     
-    target_compile_options(freertos_config INTERFACE
-    -mcpu=cortex-m3 
-    -mthumb 
-    -std=gnu99
-    -Os
-    -g3
-    -fmessage-length=0 
-    -fsigned-char 
-    -ffunction-sections 
-    -fdata-sections 
-    -ffreestanding 
-    -fno-move-loop-invariants 
-    -Wall 
-    -Wextra 
-    )
+    target_compile_options(freertos_config INTERFACE ${COMPILER_OPTION})
 
     # Select the native compile PORT
     set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
@@ -152,21 +159,7 @@ target_link_libraries(${EXECUTABLE} ${LIB_LIST})
 target_compile_definitions(${EXECUTABLE} PUBLIC ${TARGET_DEF_LISTS})
 
 # Compiler options
-target_compile_options(${EXECUTABLE} PUBLIC
-    -mcpu=cortex-m3 
-    -mthumb 
-    -std=gnu99
-    -Og 
-    -g3
-    -fmessage-length=0 
-    -fsigned-char 
-    -ffunction-sections 
-    -fdata-sections 
-    -ffreestanding 
-    -fno-move-loop-invariants 
-    -Wall 
-    -Wextra 
-)
+target_compile_options(${EXECUTABLE} PUBLIC ${COMPILER_OPTION})
 
 # Linker options
 target_link_options(${EXECUTABLE} PRIVATE
