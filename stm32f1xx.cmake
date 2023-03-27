@@ -3,7 +3,7 @@
 set(FLASH_SIZE "64K" CACHE STRING "microcontroller FLASH size") 
 set(RAM_SIZE  "20K" CACHE STRING "microcontroller RAM size")
 
-
+# compiler option
 set(TARGET_MCU_COMPILER
     -mcpu=cortex-m3 
     -mthumb 
@@ -20,6 +20,7 @@ set(TARGET_MCU_COMPILER
     -Wextra 
 )
 
+# linker option
 set(TARGET_MCU_LINKER
     -mcpu=cortex-m3
     -fmessage-length=0 
@@ -30,6 +31,7 @@ set(TARGET_MCU_LINKER
     -Xlinker --gc-sections
 )
 
+# target define
 set(TARGET_MCU_DEF
     -DDEBUG        
     -DUSE_FULL_ASSERT
