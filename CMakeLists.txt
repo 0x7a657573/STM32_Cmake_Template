@@ -6,7 +6,6 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake)
 # Switch for FreeRTOS support, enable it for some Applications who needs it.
 set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 
-
 # Set Project Name
 project (stm_basic_cmake)
 
@@ -14,6 +13,17 @@ project (stm_basic_cmake)
 set(MCU_LIST STM32F1xx STM32F4xx)
 set(MCU STM32F1xx CACHE STRING "Default target is STM32F1xx")
 set_property(CACHE MCU PROPERTY STRINGS ${MCU_LIST})
+
+if(MCU STREQUAL STM32F1xx)
+    message(STATUS "-------------STM32F1xx-------------")
+    include(stm32f1xx.cmake)
+elseif(MCU STREQUAL STM32F4xx)
+    message(STATUS "-------------STM32F4xx-------------")
+    include(stm32f4xx.cmake)
+else()
+    list(JOIN MCU_LIST "\r\n" strlist)
+    message(FATAL_ERROR "Please Select correct MCU from list: \n${strlist}")
+endif()
 
 # List of source files
 set(SRC_FILES
@@ -28,11 +38,7 @@ set(INC_FILES
 
 # List of defines
 set (TARGET_DEF_LISTS
-    -DDEBUG        
-    -DUSE_FULL_ASSERT
-    -DSTM32F103xB
-    -DUSE_HAL_DRIVER
-    -DHSE_VALUE=8000000
+    ${TARGET_MCU_DEF}
 )
 
 # List of libraries
@@ -41,31 +47,13 @@ set(LIB_LIST
 )
 
 # compiler option
-set(COMPILER_OPTION 
-    -mcpu=cortex-m3 
-    -mthumb 
-    -std=gnu99
-    -Og
-    -g3
-    -fmessage-length=0 
-    -fsigned-char 
-    -ffunction-sections 
-    -fdata-sections 
-    -ffreestanding 
-    -fno-move-loop-invariants 
-    -Wall 
-    -Wextra 
-)
+set(COMPILER_OPTION ${TARGET_MCU_COMPILER})
 
 # Linker Selection 
 set(LINKER_SECTIONS
    -Tmem.ld
    -Tsections.ld
 )
-
-# Microcontroller memory config
-set(FLASH_SIZE "64K" CACHE STRING "microcontroller FLASH size") 
-set(RAM_SIZE  "20K" CACHE STRING "microcontroller RAM size")
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/system/ldscripts/mem.ld.in"
@@ -149,16 +137,7 @@ target_compile_options(${EXECUTABLE} PUBLIC ${COMPILER_OPTION})
 target_link_options(${EXECUTABLE} PRIVATE
     ${LINKER_SECTIONS}
     -L${CMAKE_CURRENT_BINARY_DIR}/system/ldscripts
-
-    -mcpu=cortex-m3
-    -fmessage-length=0 
-    -fsigned-char 
-    -ffunction-sections
-
-    -Wall
-
-    -nostartfiles
-    -Xlinker --gc-sections
+    ${TARGET_MCU_LINKER}
     -Wl,-Map=${PROJECT_NAME}.map,--cref
     -Wl,--gc-sections
 )      
