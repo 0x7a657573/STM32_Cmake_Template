@@ -8,7 +8,7 @@ set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 
 
 # Set Project Name
-project (basic_cmake)
+project (stm_basic_cmake)
 
 # Allow switching of target mcu
 set(MCU_LIST STM32F1xx STM32F4xx)
@@ -16,13 +16,13 @@ set(MCU STM32F1xx CACHE STRING "Default target is STM32F1xx")
 set_property(CACHE MCU PROPERTY STRINGS ${MCU_LIST})
 
 # List of source files
-set(MAIN_SRC_FILES
+set(SRC_FILES
     src/main.c
     src/initialize-hardware.c
 )
 
 # List of include files
-set(MAIN_INC_FILES
+set(INC_FILES
     Inc/
 )
 
@@ -45,7 +45,7 @@ set(COMPILER_OPTION
     -mcpu=cortex-m3 
     -mthumb 
     -std=gnu99
-    -Os
+    -Og
     -g3
     -fmessage-length=0 
     -fsigned-char 
@@ -97,24 +97,8 @@ set(CMAKE_C_EXTENSIONS OFF)
 # Optional: issue a message to be sure it uses the correct toolchain file.
 message(STATUS "CMAKE_TOOLCHAIN_FILE is: ${CMAKE_TOOLCHAIN_FILE}")
 
-# Finding All SourceList.cmake in all sub directory
-# Find all subdirectories that have SourceLists.cmake files
-file(GLOB SUBDIRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} */SourceLists.cmake)
-foreach(SUBDIR ${SUBDIRS})
-    include(${SUBDIR})   
-    # Remove the SourceLists.cmake part from each subdirectory name
-    string(REGEX REPLACE "/SourceLists.cmake" "" LPATH "${SUBDIR}")
-
-    foreach(SRC_FILE ${SRC_FILES})
-        list(APPEND MAIN_SRC_FILES ${LPATH}/${SRC_FILE})
-    endforeach()
-
-    foreach(INC_FILE ${INC_FILES})
-        list(APPEND MAIN_INC_FILES ${LPATH}/${INC_FILE})
-    endforeach()
-    
-    unset(SRC_FILES)
-endforeach()
+# Add System core file
+include(system/stm_system.cmake)
 
 # Add FreeRTOS
 if(ENABLE_FREERTOS)
@@ -146,11 +130,11 @@ endif(ENABLE_FREERTOS)
 
 # Build the executable based on the source files
 set(EXECUTABLE ${PROJECT_NAME}.elf)
-add_executable(${EXECUTABLE} ${MAIN_SRC_FILES})
+add_executable(${EXECUTABLE} ${SRC_FILES})
 
 
 # include directories to use when compiling a given target.
-target_include_directories(${EXECUTABLE} PUBLIC ${MAIN_INC_FILES})
+target_include_directories(${EXECUTABLE} PUBLIC ${INC_FILES})
 
 # Link the executable to the simple_cmake library.
 target_link_libraries(${EXECUTABLE} ${LIB_LIST})

@@ -6,7 +6,7 @@
     "configurations": [
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./build/basic_cmake.elf",
+            "executable": "./build/stm_basic_cmake.elf",
             "name": "Debug (J-Link)",
             "request": "launch",
             "type": "cortex-debug",
