@@ -7,7 +7,7 @@
         {
             "cwd": "${workspaceFolder}",
             "executable": "./build/stm_basic_cmake.elf",
-            "name": "Debug (J-Link)",
+            "name": "Debug F1 (J-Link)",
             "request": "launch",
             "type": "cortex-debug",
             "device": "STM32F103CB",
@@ -17,6 +17,20 @@
             "interface": "swd",
             "rtos": "FreeRTOS",
             "svdFile" : "${workspaceFolder}/system/STM32F103xx.svd"
+        },
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/stm_basic_cmake.elf",
+            "name": "Debug F4 (J-Link)",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32F407VG",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "jlink",
+            "interface": "swd",
+            "rtos": "FreeRTOS",
+            //"svdFile" : "${workspaceFolder}/system/STM32F103xx.svd"
         }
     ]
 }
