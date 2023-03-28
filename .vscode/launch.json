@@ -16,7 +16,7 @@
             "servertype": "jlink",
             "interface": "swd",
             "rtos": "FreeRTOS",
-            "svdFile" : "${workspaceFolder}/system/STM32F103xx.svd"
+            "svdFile" : "${workspaceFolder}/system/svd/STM32F103xx.svd"
         },
         {
             "cwd": "${workspaceFolder}",
@@ -30,7 +30,7 @@
             "servertype": "jlink",
             "interface": "swd",
             "rtos": "FreeRTOS",
-            //"svdFile" : "${workspaceFolder}/system/STM32F103xx.svd"
+            "svdFile" : "${workspaceFolder}/system/svd/STM32F407.svd"
         }
     ]
 }
