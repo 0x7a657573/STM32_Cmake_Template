@@ -88,28 +88,28 @@ set(SYS_SRC_FILES
         #system/stm32f4xx_hal_driver/Src/stm32f4xx_hal_timebase_rtc_alarm_template.c
         system/stm32f4xx_hal_driver/Src/stm32f4xx_hal_tim.c
         # LL Driver files
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_lptim.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_i2c.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_gpio.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fsmc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fmpi2c.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fmc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_exti.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dma.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dma2d.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dac.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_crc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_adc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_utils.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_usb.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_usart.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_tim.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_spi.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_sdmmc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rtc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rng.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rcc.c
-        # system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_pwr.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_lptim.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_i2c.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_gpio.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fsmc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fmpi2c.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_fmc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_exti.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dma.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dma2d.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_dac.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_crc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_adc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_utils.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_usb.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_usart.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_tim.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_spi.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_sdmmc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rtc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rng.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_rcc.c
+        system/stm32f4xx_hal_driver/Src/stm32f4xx_ll_pwr.c
 )
 
 set(SYS_INC_FILES
