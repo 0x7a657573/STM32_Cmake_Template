@@ -28,7 +28,6 @@ endif()
 # List of source files
 set(SRC_FILES
     src/main.c
-    src/initialize-hardware.c
 )
 
 # List of include files
