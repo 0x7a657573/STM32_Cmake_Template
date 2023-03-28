@@ -1,3 +1,6 @@
 {
-    "cmake.configureArgs" : ["-DENABLE_FREERTOS:BOOL=True"]
+    "cmake.configureArgs" : [
+        "-DENABLE_FREERTOS:BOOL=True",
+        "-DMCU=STM32F4xx"
+    ]
 }
