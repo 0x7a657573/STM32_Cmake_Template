@@ -2,9 +2,17 @@
 set(FLASH_SIZE "1024K" CACHE STRING "microcontroller FLASH size") 
 set(RAM_SIZE  "96K" CACHE STRING "microcontroller RAM size")
 
+
+#FreeRTOS Port Config
+if(ENABLE_FREERTOS)
+    set(FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
+endif()
+
 # compiler option
 set(TARGET_MCU_COMPILER
     -mcpu=cortex-m4 
+    -mfloat-abi=hard 
+    -mfpu=fpv4-sp-d16
     -mthumb 
     -std=gnu99
     -Og
@@ -21,7 +29,10 @@ set(TARGET_MCU_COMPILER
 
 # linker option
 set(TARGET_MCU_LINKER
-    -mcpu=cortex-m3
+    -mcpu=cortex-m4
+    -mthumb 
+    -mfloat-abi=hard 
+    -mfpu=fpv4-sp-d16
     -fmessage-length=0 
     -fsigned-char 
     -ffunction-sections

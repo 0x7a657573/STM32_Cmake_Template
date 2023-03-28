@@ -105,7 +105,7 @@ if(ENABLE_FREERTOS)
     target_compile_options(freertos_config INTERFACE ${COMPILER_OPTION})
 
     # Select the native compile PORT
-    set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
+    
     set(FREERTOS_HEAP "4" CACHE STRING "")
     set(FREERTOS_MAINSTACK "512" CACHE STRING "FreeRTOS main task stack in Byte")
 

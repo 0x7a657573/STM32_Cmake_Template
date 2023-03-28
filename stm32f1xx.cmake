@@ -3,6 +3,11 @@
 set(FLASH_SIZE "64K" CACHE STRING "microcontroller FLASH size") 
 set(RAM_SIZE  "20K" CACHE STRING "microcontroller RAM size")
 
+#FreeRTOS Port Config
+if(ENABLE_FREERTOS)
+    set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
+endif()
+
 # compiler option
 set(TARGET_MCU_COMPILER
     -mcpu=cortex-m3 
