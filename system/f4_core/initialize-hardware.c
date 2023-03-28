@@ -33,6 +33,11 @@
 
 #include "diag/trace.h"
 
+#ifdef USE_FREERTOS
+#include <FreeRTOS.h>
+#include <task.h>
+#include <portmacro.h>
+#endif
 // ----------------------------------------------------------------------------
 
 // The external clock frequency is specified as a preprocessor definition
@@ -89,6 +94,15 @@ __initialize_hardware(void)
   // Call the CSMSIS system clock routine to store the clock frequency
   // in the SystemCoreClock global RAM location.
   SystemCoreClockUpdate();
+
+  // If use RTOS Try Setup RTOS
+#ifdef USE_FREERTOS
+    extern void main( void * pvParameters );
+    /* Create main tasks defined within main.c itself */
+    xTaskCreate( main, "main", FREERTOS_MAINSTACK/sizeof(int), NULL, tskIDLE_PRIORITY, NULL );
+    /* Start the tasks and timer running. */
+    vTaskStartScheduler();
+#endif
 }
 
 // Disable when using RTOSes, since they have their own handler.
@@ -124,9 +138,6 @@ SystemClock_Config(void)
   // voltage scaling value regarding system frequency refer to product
   // datasheet.
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-#warning "Please check if the SystemClock_Config() settings match your board!"
-  // Comment out the warning after checking and updating.
 
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
