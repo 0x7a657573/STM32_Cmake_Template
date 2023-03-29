@@ -106,7 +106,7 @@ __initialize_hardware(void)
 }
 
 // Disable when using RTOSes, since they have their own handler.
-#if 0
+#ifndef USE_FREERTOS
 
 // This is a sample SysTick handler, use it if you need HAL timings.
 void __attribute__ ((section(".after_vectors")))
@@ -115,6 +115,13 @@ SysTick_Handler(void)
 #if defined(USE_HAL_DRIVER)
 	HAL_IncTick();
 #endif
+}
+
+#else
+/* redefine HAL_Delay use RTOS*/
+void HAL_Delay(uint32_t Delay)
+{
+  vTaskDelay(Delay/portTICK_PERIOD_MS);
 }
 
 #endif
