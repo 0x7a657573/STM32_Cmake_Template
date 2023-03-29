@@ -22,24 +22,11 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
-#include <stm32f1xx_ll_bus.h>
-#include <stm32f1xx_ll_rcc.h>
-#include <stm32f1xx_ll_system.h>
-#include <stm32f1xx_ll_utils.h>
-#include <stm32f1xx_ll_gpio.h>
-#if defined(USE_FULL_ASSERT)
-//#include <stm32_assert.h>
-#endif /* USE_FULL_ASSERT */
+#include <bsp.h>
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-/**
-  * @brief LED 
-  */
-#define LED_PIN                           LL_GPIO_PIN_13
-#define LED_GPIO_PORT                     GPIOC
-#define LED_GPIO_CLK_ENABLE()             LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC)
 
 
 

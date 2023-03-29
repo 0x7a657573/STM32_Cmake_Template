@@ -33,6 +33,7 @@ set(SRC_FILES
 # List of include files
 set(INC_FILES
     Inc/
+    BSP/
 )
 
 # List of defines

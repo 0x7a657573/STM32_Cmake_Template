@@ -48,4 +48,5 @@ set(TARGET_MCU_DEF
     -DSTM32F407xx 
     -DUSE_HAL_DRIVER 
     -DHSE_VALUE=8000000 
+    -D${MCU}
 )
