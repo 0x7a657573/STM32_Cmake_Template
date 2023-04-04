@@ -1,12 +1,12 @@
 
 # Microcontroller memory config
 set(FLASH_SIZE "64K" CACHE STRING "microcontroller FLASH size") 
-set(RAM_SIZE  "4K" CACHE STRING "microcontroller RAM size")
+set(RAM_SIZE  "8K" CACHE STRING "microcontroller RAM size")
 
 #FreeRTOS Port Config
 if(ENABLE_FREERTOS)
     set(FREERTOS_PORT "GCC_ARM_CM0" CACHE STRING "" FORCE)
-    set(FREERTOS_HEAPMEM "2048" CACHE STRING "FreeRTOS HEAP Memory in Byte")
+    set(FREERTOS_HEAPMEM "4096" CACHE STRING "FreeRTOS HEAP Memory in Byte")
 endif()
 
 # compiler option
