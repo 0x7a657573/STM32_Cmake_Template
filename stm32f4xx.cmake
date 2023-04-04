@@ -6,6 +6,7 @@ set(RAM_SIZE  "96K" CACHE STRING "microcontroller RAM size")
 #FreeRTOS Port Config
 if(ENABLE_FREERTOS)
     set(FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
+    set(FREERTOS_HEAPMEM "20480" CACHE STRING "FreeRTOS HEAP Memory in Byte")
 endif()
 
 # compiler option

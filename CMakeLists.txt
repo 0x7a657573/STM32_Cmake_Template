@@ -104,6 +104,7 @@ if(ENABLE_FREERTOS)
     target_compile_definitions(freertos_config
     INTERFACE
     projCOVERAGE_TEST=0
+    FREERTOS_HEAPMEM=${FREERTOS_HEAPMEM}
     )
     
     target_compile_options(freertos_config INTERFACE ${COMPILER_OPTION})
