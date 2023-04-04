@@ -33,6 +33,11 @@
 
 #include "diag/trace.h"
 
+#ifdef USE_FREERTOS
+#include <FreeRTOS.h>
+#include <task.h>
+#include <portmacro.h>
+#endif
 // ----------------------------------------------------------------------------
 
 // The external clock frequency is specified as a preprocessor definition
@@ -89,10 +94,19 @@ __initialize_hardware(void)
   // Call the CSMSIS system clock routine to store the clock frequency
   // in the SystemCoreClock global RAM location.
   SystemCoreClockUpdate();
+
+  // If use RTOS Try Setup RTOS
+#ifdef USE_FREERTOS
+    extern void main( void * pvParameters );
+    /* Create main tasks defined within main.c itself */
+    xTaskCreate( main, "main", FREERTOS_MAINSTACK/sizeof(int), NULL, tskIDLE_PRIORITY, NULL );
+    /* Start the tasks and timer running. */
+    vTaskStartScheduler();
+#endif
 }
 
 // Disable when using RTOSes, since they have their own handler.
-#if 0
+#ifndef USE_FREERTOS
 
 // This is a sample SysTick handler, use it if you need HAL timings.
 void __attribute__ ((section(".after_vectors")))
@@ -103,8 +117,15 @@ SysTick_Handler(void)
 #endif
 }
 
-#endif
+#else
 
+/* redefine HAL_Delay use RTOS*/
+void HAL_Delay(uint32_t Delay)
+{
+  vTaskDelay(Delay/portTICK_PERIOD_MS);
+}
+
+#endif
 // ----------------------------------------------------------------------------
 
 /**
