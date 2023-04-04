@@ -10,7 +10,7 @@ set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 project (stm_basic_cmake)
 
 # Allow switching of target mcu
-set(MCU_LIST STM32F1xx STM32F4xx)
+set(MCU_LIST STM32F1xx STM32F4xx STM32F0xx)
 set(MCU STM32F1xx CACHE STRING "Default target is STM32F1xx")
 set_property(CACHE MCU PROPERTY STRINGS ${MCU_LIST})
 
@@ -20,6 +20,9 @@ if(MCU STREQUAL STM32F1xx)
 elseif(MCU STREQUAL STM32F4xx)
     message(STATUS "-------------STM32F4xx-------------")
     include(stm32f4xx.cmake)
+elseif(MCU STREQUAL STM32F0xx)
+    message(STATUS "-------------STM32F0xx-------------")
+    include(stm32f0xx.cmake)
 else()
     list(JOIN MCU_LIST "\r\n" strlist)
     message(FATAL_ERROR "Please Select correct MCU from list: \n${strlist}")
