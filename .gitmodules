@@ -7,3 +7,6 @@
 [submodule "system/stm32f4xx_hal_driver"]
 	path = system/stm32f4xx_hal_driver
 	url = https://github.com/STMicroelectronics/stm32f4xx_hal_driver.git
+[submodule "system/stm32f0xx_hal_driver"]
+	path = system/stm32f0xx_hal_driver
+	url = https://github.com/STMicroelectronics/stm32f0xx_hal_driver
