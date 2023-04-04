@@ -42,7 +42,6 @@ set(SYS_SRC_FILES
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_pwr.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_pcd_ex.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_pcd.c
-        system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_msp_template.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_iwdg.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_irda.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_i2s.c
@@ -55,9 +54,6 @@ set(SYS_SRC_FILES
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_uart.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_tsc.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_tim_ex.c
-        system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_timebase_tim_template.c
-        system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_timebase_rtc_wakeup_template.c
-        system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_timebase_rtc_alarm_template.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_tim.c
         system/stm32f0xx_hal_driver/Src/stm32f0xx_hal_spi_ex.c
         # LL
