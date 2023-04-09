@@ -125,6 +125,11 @@ void HAL_Delay(uint32_t Delay)
   vTaskDelay(Delay/portTICK_PERIOD_MS);
 }
 
+uint32_t HAL_GetTick(void)
+{
+  return xTaskGetTickCount();
+}
+
 #endif
 
 // ----------------------------------------------------------------------------
