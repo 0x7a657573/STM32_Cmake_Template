@@ -129,6 +129,21 @@ uint32_t HAL_GetTick(void)
   return xTaskGetTickCount();
 }
 
+/* redefine malloc and free to use freertos heap manager */
+void *pvPortMalloc( size_t xWantedSize );
+void vPortFree( void *pv );
+
+void free(void *p)
+{
+	vPortFree(p);
+}
+
+void *malloc(size_t s)
+{
+	if(s==0)	return 0;
+	return pvPortMalloc(s);
+}
+
 #endif
 
 // ----------------------------------------------------------------------------
