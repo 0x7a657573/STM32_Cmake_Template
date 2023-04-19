@@ -9,3 +9,6 @@ else()
         list(JOIN MCU_LIST "\r\n" strlist)
         message(FATAL_ERROR "Please Select correct MCU from list: \n${strlist}")
 endif()
+
+# add system file's
+list(APPEND SRC_FILES system/syscall.c)
