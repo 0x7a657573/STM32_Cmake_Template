@@ -6,6 +6,9 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake)
 # Switch for FreeRTOS support, enable it for some Applications who needs it.
 set(ENABLE_FREERTOS OFF CACHE BOOL "Enable FreeRTOS")
 
+# Switch for use newlib-nano , enable it for some Applications who needs it.
+set(USE_NEWLIBNANO OFF CACHE BOOL "Use newlib-nano")
+
 # Set Project Name
 project (stm_basic_cmake)
 
@@ -119,6 +122,11 @@ if(ENABLE_FREERTOS)
     list(APPEND TARGET_DEF_LISTS USE_FREERTOS)
     list(APPEND TARGET_DEF_LISTS FREERTOS_MAINSTACK=${FREERTOS_MAINSTACK})
 endif(ENABLE_FREERTOS)
+
+# use new lib nano
+if(USE_NEWLIBNANO)
+    list(APPEND TARGET_MCU_LINKER --specs=nano.specs)
+endif(USE_NEWLIBNANO)
 
 # Build the executable based on the source files
 set(EXECUTABLE ${PROJECT_NAME}.elf)
