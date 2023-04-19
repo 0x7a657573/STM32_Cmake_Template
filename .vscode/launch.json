@@ -5,6 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/stm_basic_cmake.elf",
+            "name": "Debug F1 (OpenOCD+STlink)",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "STM32F103CB",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "searchDir": [],
+            "preLaunchCommands": [
+                "monitor poll",
+                "monitor reset init",
+                "set mem inaccessible-by-default off"
+            ],
+            "postLaunchCommands": [
+                "monitor reset init",
+                "monitor sleep 200"
+            ],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "rtos": "FreeRTOS",
+            "svdFile" : "${workspaceFolder}/system/svd/STM32F103xx.svd"
+        },
+        {
             "cwd": "${workspaceFolder}",
             "executable": "./build/stm_basic_cmake.elf",
             "name": "Debug F1 (J-Link)",
