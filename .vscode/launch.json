@@ -12,10 +12,10 @@
             "type": "cortex-debug",
             "servertype": "openocd",
             "interface": "swd",
-            "device": "STM32F103CB",
+            "device": "STM32F030C8",
             "configFiles": [
                 "interface/stlink.cfg",
-                "target/stm32f1x.cfg"
+                "target/stm32f0x.cfg"
             ],
             "searchDir": [],
             "preLaunchCommands": [
