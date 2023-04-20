@@ -12,6 +12,9 @@ set(USE_NEWLIBNANO OFF CACHE BOOL "Use newlib-nano")
 # Set Project Name
 project (stm_basic_cmake)
 
+#Optimization Options
+set (OPTIM Os CACHE STRING "Default Optimization is Os") 
+
 # Allow switching of target mcu
 set(MCU_LIST STM32F1xx STM32F4xx STM32F0xx)
 set(MCU STM32F1xx CACHE STRING "Default target is STM32F1xx")
