@@ -16,12 +16,13 @@ set(TARGET_MCU_COMPILER
     -mfpu=fpv4-sp-d16
     -mthumb 
     -std=gnu99
-    -Og
+    -${OPTIM}
     -g3
     -fmessage-length=0 
     -fsigned-char 
     -ffunction-sections 
     -fdata-sections 
+    -Wno-unused-parameter
     -ffreestanding 
     -fno-move-loop-invariants 
     -Wall 
@@ -40,6 +41,8 @@ set(TARGET_MCU_LINKER
     -Wall
     -nostartfiles
     -Xlinker --gc-sections
+    -Wl,--print-memory-usage
+    -Wl,--print-memory-usage
 )
 
 # target define

@@ -2,6 +2,18 @@
     "cmake.configureArgs" : [
         "-DENABLE_FREERTOS:BOOL=True",
         "-DUSE_NEWLIBNANO=True",
-        "-DMCU=STM32F4xx"
+        "-DMCU=STM32F0xx",
+        
+        /*
+        *   Optimizition command , use one of the following values :
+        *   O0      : Opt NONE
+        *   Og      : Opt for Debug
+        *   O1      : Optimize
+        *   O2      : Optimize more
+        *   O3      : Optimize most
+        *   Os      : Optimize for size
+        *   Ofast   : Optimize for speed    
+        */
+        "-DOPTIM=Os"
     ]
 }
