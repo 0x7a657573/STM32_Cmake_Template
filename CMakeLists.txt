@@ -169,3 +169,6 @@ add_custom_command(TARGET ${EXECUTABLE}
         COMMAND ${CMAKE_OBJCOPY} -O binary ${EXECUTABLE} ${PROJECT_NAME}.bin
         COMMAND ${CMAKE_OBJCOPY} -O ihex ${EXECUTABLE} ${PROJECT_NAME}.hex
 )
+
+#include Doxygen module 
+include (doxygen.cmake)
