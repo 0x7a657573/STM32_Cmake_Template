@@ -80,10 +80,23 @@ SystemClock_Config(void);
 //
 // Warning: The HAL requires the system timer, running at 1000 Hz
 // and calling HAL_IncTick().
+#ifdef USE_FREERTOS
+uint32_t (*_GetTick)(void);     /*the pointer to get system tick function*/
+void (*_Delay)(uint32_t Delay); /*the pointer to delay function*/
+uint32_t hard_GetTick(void);
+void hard_Delay(uint32_t Delay);
+void xOS_Delay(uint32_t Delay);
+uint32_t xOS_GetTick(void);
+#endif
 
 void
 __initialize_hardware(void)
 {
+  #ifdef USE_FREERTOS
+  _GetTick = hard_GetTick;
+  _Delay = hard_Delay;
+  #endif
+
   // Initialise the HAL Library; it must be the first function
   // to be executed before the call of any HAL function.
   HAL_Init();
@@ -100,6 +113,9 @@ __initialize_hardware(void)
     extern void main( void * pvParameters );
     /* Create main tasks defined within main.c itself */
     xTaskCreate( main, "main", FREERTOS_MAINSTACK/sizeof(int), NULL, tskIDLE_PRIORITY, NULL );
+    /*Use Os Function for overwrite HAL function*/
+    _GetTick = xOS_GetTick;
+    _Delay = xOS_Delay;
     /* Start the tasks and timer running. */
     vTaskStartScheduler();
 #endif
@@ -118,15 +134,42 @@ SysTick_Handler(void)
 }
 
 #else
+
+/****** None Os GetTick Function *****/
+uint32_t hard_GetTick(void)
+{
+  static int co = 0;
+  return co++;
+}
+
+/****** None Os Delay Function *****/
+void hard_Delay(uint32_t Delay)
+{
+  int conter = 473 * Delay;
+  while(conter--)
+    __NOP();
+}
+
+/****** Os Delay Function *****/
+void xOS_Delay(uint32_t Delay)
+{
+  vTaskDelay(Delay/portTICK_PERIOD_MS);
+}
+/****** Os GetTick Function *****/
+uint32_t xOS_GetTick(void)
+{
+  return xTaskGetTickCount();
+}
+
 /* redefine HAL_Delay use RTOS*/
 void HAL_Delay(uint32_t Delay)
 {
-  vTaskDelay(Delay/portTICK_PERIOD_MS);
+  _Delay(Delay);
 }
 
 uint32_t HAL_GetTick(void)
 {
-  return xTaskGetTickCount();
+  return _GetTick();
 }
 
 /* redefine malloc and free to use freertos heap manager */
