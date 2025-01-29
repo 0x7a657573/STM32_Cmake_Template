@@ -29,6 +29,9 @@ elseif(MCU STREQUAL STM32F4xx)
 elseif(MCU STREQUAL STM32F0xx)
     message(STATUS "-------------STM32F0xx-------------")
     include(stm32f0xx.cmake)
+elseif(MCU STREQUAL STM32L4xx)
+    message(STATUS "-------------STM32L4xx-------------")
+    include(stm32l4xx.cmake)
 else()
     list(JOIN MCU_LIST "\r\n" strlist)
     message(FATAL_ERROR "Please Select correct MCU from list: \n${strlist}")
@@ -73,20 +76,22 @@ configure_file (
     "${PROJECT_BINARY_DIR}/system/ldscripts/sections.ld"
 )
 
-find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-# Update submodules as needed
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --depth=1
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init --recursive failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
-endif()
+include(cmake/git_submodules.cmake)
+update_git_submodules()
+#find_package(Git QUIET)
+# if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+# # Update submodules as needed
+#     option(GIT_SUBMODULE "Check submodules during build" ON)
+#     if(GIT_SUBMODULE)
+#         message(STATUS "Submodule update")
+#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --depth=1
+#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
+#         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+#             message(FATAL_ERROR "git submodule update --init --recursive failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+#         endif()
+#     endif()
+# endif()
 
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
@@ -99,7 +104,7 @@ include(system/stm_system.cmake)
 
 # Add FreeRTOS
 if(ENABLE_FREERTOS)
-    message(STATUS "ٍEnable FreeRTOS")
+    message(STATUS "Enable FreeRTOS")
 
     add_library(freertos_config INTERFACE)
     target_include_directories(freertos_config SYSTEM

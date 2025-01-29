@@ -103,5 +103,19 @@
             "rtos": "FreeRTOS",
             "svdFile" : "${workspaceFolder}/system/svd/STM32F407.svd"
         },
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/stm_basic_cmake.elf",
+            "name": "Debug L4 (J-Link)",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32L476RG",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "jlink",
+            "interface": "swd",
+            "rtos": "FreeRTOS",
+            "svdFile" : "${workspaceFolder}/system/svd/STM32L476.svd"
+        },
     ]
 }

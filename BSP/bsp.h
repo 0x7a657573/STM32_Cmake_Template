@@ -52,6 +52,17 @@
 #define LED_GPIO_PORT                     GPIOC
 #define LED_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
 
+#elif (STM32L4xx)
+#include <stm32l4xx.h>
+#include <stm32l4xx_ll_bus.h>
+#include <stm32l4xx_ll_gpio.h>
+#include <stm32l4xx_ll_rcc.h>
+#include <stm32l4xx_ll_system.h>
+
+#define LED_PIN                           LL_GPIO_PIN_5
+#define LED_GPIO_PORT                     GPIOA
+#define LED_GPIO_CLK_ENABLE()             LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA)
+
 #else
     #error Please add your board config
 #endif
